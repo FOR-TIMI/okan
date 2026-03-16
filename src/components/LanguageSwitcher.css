@@ -1,0 +1,25 @@
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.lang-switcher:hover {
+  color: var(--text-primary);
+  background: var(--border);
+}
+
+.lang-switcher__label {
+  display: block;
+  position: absolute;
+}

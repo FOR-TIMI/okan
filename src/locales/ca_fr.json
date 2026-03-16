@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "gallery": "Galerie",
+    "about": "À propos",
+    "home": "Accueil"
+  },
+  "hero": {
+    "eyebrow": "Œuvres Originales",
+    "title": "L'art parle là\noù les mots s'arrêtent.",
+    "subtitle": "Une collection de peintures originales explorant la lumière, la mémoire et le langage silencieux des formes.",
+    "cta": "Voir la galerie",
+    "scroll": "Défiler pour explorer"
+  },
+  "featured": {
+    "eyebrow": "Œuvres en Vedette",
+    "title": "Pièces Sélectionnées",
+    "viewAll": "Voir Toutes les Œuvres"
+  },
+  "gallery": {
+    "eyebrow": "Collection Complète",
+    "title": "Toutes les Œuvres",
+    "search": "Rechercher par titre, médium ou année…",
+    "filterAll": "Tout",
+    "noResults": "Aucune œuvre trouvée.",
+    "columns": {
+      "title": "Titre",
+      "year": "Année",
+      "medium": "Médium"
+    }
+  },
+  "artwork": {
+    "year": "Année",
+    "medium": "Médium",
+    "dimensions": "Dimensions",
+    "description": "À propos de cette œuvre",
+    "back": "Retour à la galerie",
+    "prev": "Précédent",
+    "next": "Suivant"
+  },
+  "about": {
+    "eyebrow": "L'Artiste",
+    "title": "À propos",
+    "body1": "Animé par une fascination de toujours pour la lumière et la perception, mon travail existe à la frontière entre le vu et le ressenti. Chaque toile est une tentative de cristalliser un moment fugace — la qualité de la lumière de l'après-midi à travers une fenêtre, le poids du silence dans une pièce vide.",
+    "body2": "Travaillant principalement à l'huile et aux médias mixtes, j'explore la tension entre précision et spontanéité, construisant des couches qui récompensent un regard soutenu. Les tableaux ne sont jamais terminés, plutôt abandonnés au bon moment.",
+    "body3": "Basé au Canada, mon travail a été exposé partout en Amérique du Nord et en Europe. Les commandes et les demandes de renseignements sont les bienvenues."
+  },
+  "footer": {
+    "tagline": "Peintures originales et œuvres sur papier.",
+    "inquiries": "Renseignements",
+    "rights": "Tous droits réservés."
+  },
+  "theme": {
+    "dark": "Mode sombre",
+    "light": "Mode clair"
+  }
+}

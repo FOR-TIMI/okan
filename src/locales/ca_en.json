@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "gallery": "Gallery",
+    "about": "About",
+    "home": "Home"
+  },
+  "hero": {
+    "eyebrow": "Original Works",
+    "title": "Art that speaks\nwhere words end.",
+    "subtitle": "A collection of original paintings exploring light, memory, and the quiet language of form.",
+    "cta": "View Gallery",
+    "scroll": "Scroll to explore"
+  },
+  "featured": {
+    "eyebrow": "Featured Works",
+    "title": "Selected Pieces",
+    "viewAll": "View All Works"
+  },
+  "gallery": {
+    "eyebrow": "Complete Collection",
+    "title": "All Works",
+    "search": "Search by title, medium, or year…",
+    "filterAll": "All",
+    "noResults": "No works found.",
+    "columns": {
+      "title": "Title",
+      "year": "Year",
+      "medium": "Medium"
+    }
+  },
+  "artwork": {
+    "year": "Year",
+    "medium": "Medium",
+    "dimensions": "Dimensions",
+    "description": "About this work",
+    "back": "Back to Gallery",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "about": {
+    "eyebrow": "The Artist",
+    "title": "About",
+    "body1": "Driven by a lifelong fascination with light and perception, my work exists at the boundary between the seen and the felt. Each canvas is an attempt to crystallise a fleeting moment — the quality of afternoon light through a window, the weight of silence in an empty room.",
+    "body2": "Working primarily in oils and mixed media, I explore the tension between precision and spontaneity, building layers that reward sustained looking. The paintings are never finished so much as abandoned at the right moment.",
+    "body3": "Based in Canada, my work has been exhibited across North America and Europe. Commissions and inquiries are welcome."
+  },
+  "footer": {
+    "tagline": "Original paintings & works on paper.",
+    "inquiries": "Inquiries",
+    "rights": "All rights reserved."
+  },
+  "theme": {
+    "dark": "Dark mode",
+    "light": "Light mode"
+  }
+}

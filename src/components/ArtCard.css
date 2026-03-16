@@ -1,0 +1,122 @@
+.art-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.art-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1.25rem;
+}
+
+/* Image */
+.art-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--bg-secondary);
+  aspect-ratio: 4 / 5;
+}
+
+.art-card__blur {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-secondary);
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.art-card__blur--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.art-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.art-card__image-wrap:hover .art-card__img {
+  transform: scale(1.05);
+}
+
+.art-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: 2;
+}
+
+.art-card__image-wrap:hover .art-card__overlay {
+  opacity: 1;
+}
+
+.art-card__overlay-text {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  transform: translateY(8px);
+  transition: transform var(--transition-base);
+}
+
+.art-card__image-wrap:hover .art-card__overlay-text {
+  transform: translateY(0);
+}
+
+/* Meta */
+.art-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.art-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  font-weight: 300;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+  position: relative;
+  display: inline-block;
+}
+
+.art-card__title-line {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--transition-base);
+}
+
+.art-card__link:hover .art-card__title {
+  color: var(--accent);
+}
+
+.art-card__link:hover .art-card__title-line {
+  width: 100%;
+}
+
+.art-card__sub {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.art-card__year {
+  color: var(--text-muted);
+}
