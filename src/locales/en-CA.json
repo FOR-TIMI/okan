@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "gallery": "Works",
+    "about": "About"
+  },
+  "hero": {
+    "eyebrow": "Original Works",
+    "title": "Art that speaks\nwhere words end.",
+    "subtitle": "A collection of original paintings exploring light, memory, and the quiet language of form.",
+    "cta": "View Works",
+    "scroll": "Scroll to explore"
+  },
+  "featured": {
+    "eyebrow": "Selected Works",
+    "title": "Featured",
+    "viewAll": "View All Works"
+  },
+  "gallery": {
+    "eyebrow": "Complete Collection",
+    "title": "All Works",
+    "search": "Search by title, year, medium, size…",
+    "searchClear": "Clear search",
+    "sortBy": "Sort by",
+    "sortOptions": {
+      "titleAsc": "Title A–Z",
+      "titleDesc": "Title Z–A",
+      "yearAsc": "Year — Oldest",
+      "yearDesc": "Year — Newest"
+    },
+    "noResults": "No works found.",
+    "columns": {
+      "title": "Title",
+      "year": "Year",
+      "medium": "Medium"
+    }
+  },
+  "artwork": {
+    "year": "Year",
+    "medium": "Medium",
+    "size": "Size",
+    "back": "Back to Works",
+    "prev": "Previous",
+    "next": "Next",
+    "originalTitle": "Original title",
+    "viewWork": "View work"
+  },
+  "about": {
+    "eyebrow": "The Artist",
+    "title": "About",
+    "body1": "FYE (born Obaloluwa Olatide Ladiran) is a creator whose work explores emotion, thought, and identity through mixed media. He describes himself as a medium.",
+    "body2": "At the center of his practice is Okan, a recurring character named after the Yoruba word for \u201cheart\u201d and \u201csoul\u201d \u2014 its head form closely mirrors the anatomy of the human heart. This convergence between form and meaning has become a defining element of his work, positioning Okan as an embodiment of the heart, mind, and soul.",
+    "body3": "Through this figure, he invites viewers to look beyond the surface and engage with layered psychological and shared human experiences."
+  },
+  "footer": {
+    "tagline": "Original paintings & works on paper.",
+    "inquiries": "Inquiries",
+    "rights": "All rights reserved."
+  },
+  "theme": {
+    "dark": "Dark mode",
+    "light": "Light mode",
+    "toggle": "Toggle theme"
+  },
+  "lang": {
+    "toggle": "Switch language"
+  }
+}

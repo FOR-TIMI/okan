@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
+import OkanLogo from './OkanLogo';
 import './Navbar.css';
 
 interface Props {
@@ -27,6 +28,16 @@ export default function Navbar({ theme, onThemeToggle }: Props) {
     setMenuOpen(false);
   }, [location]);
 
+  // Trap focus when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
   const links = [
     { to: '/', label: t('nav.home') },
     { to: '/gallery', label: t('nav.gallery') },
@@ -39,18 +50,21 @@ export default function Navbar({ theme, onThemeToggle }: Props) {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="navbar__inner container">
-        <Link to="/" className="navbar__logo">
-          Okan<span className="navbar__logo-dot">.</span>
+        <Link to="/" className="navbar__logo" aria-label="Okan — Home">
+          <OkanLogo size={44} className="navbar__logo-img" />
         </Link>
 
-        <ul className="navbar__links">
+        <ul className="navbar__links" role="list">
           {links.map(({ to, label }) => (
             <li key={to}>
               <Link
                 to={to}
                 className={`navbar__link ${location.pathname === to ? 'navbar__link--active' : ''}`}
+                aria-current={location.pathname === to ? 'page' : undefined}
               >
                 {label}
               </Link>
@@ -66,20 +80,23 @@ export default function Navbar({ theme, onThemeToggle }: Props) {
         <button
           className={`navbar__burger ${menuOpen ? 'navbar__burger--open' : ''}`}
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
-          <span /><span /><span />
+          <span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" />
         </button>
       </div>
 
       {/* Mobile menu */}
       <motion.div
+        id="mobile-menu"
         className="navbar__mobile"
         initial={false}
         animate={menuOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
         transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
         style={{ overflow: 'hidden' }}
+        aria-hidden={!menuOpen}
       >
         <div className="navbar__mobile-inner">
           {links.map(({ to, label }, i) => (
@@ -92,6 +109,8 @@ export default function Navbar({ theme, onThemeToggle }: Props) {
               <Link
                 to={to}
                 className={`navbar__mobile-link ${location.pathname === to ? 'navbar__mobile-link--active' : ''}`}
+                aria-current={location.pathname === to ? 'page' : undefined}
+                tabIndex={menuOpen ? 0 : -1}
               >
                 {label}
               </Link>

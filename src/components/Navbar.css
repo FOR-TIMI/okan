@@ -38,6 +38,11 @@
   color: var(--accent);
 }
 
+/* Inline SVG logo — inherits currentColor, works in both themes */
+.navbar__logo-img {
+  display: block;
+}
+
 /* Desktop links */
 .navbar__links {
   display: flex;

@@ -3,17 +3,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './LanguageSwitcher.css';
 
 export default function LanguageSwitcher() {
-  const { i18n } = useTranslation();
-  const isFr = i18n.language === 'ca_fr';
+  const { i18n, t } = useTranslation();
+  const isFr = i18n.language === 'fr-CA';
 
   const toggle = () => {
-    const next = isFr ? 'ca_en' : 'ca_fr';
+    const next = isFr ? 'en-CA' : 'fr-CA';
     i18n.changeLanguage(next);
     localStorage.setItem('lang', next);
   };
 
   return (
-    <button className="lang-switcher" onClick={toggle} aria-label="Switch language">
+    <button
+      className="lang-switcher"
+      onClick={toggle}
+      aria-label={t('lang.toggle')}
+    >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={i18n.language}

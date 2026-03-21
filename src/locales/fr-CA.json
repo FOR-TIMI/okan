@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "gallery": "Œuvres",
+    "about": "À propos"
+  },
+  "hero": {
+    "eyebrow": "Œuvres originales",
+    "title": "Un art qui parle\nlà où les mots s'arrêtent.",
+    "subtitle": "Une collection de peintures originales explorant la lumière, la mémoire et le langage silencieux de la forme.",
+    "cta": "Voir les œuvres",
+    "scroll": "Défiler pour explorer"
+  },
+  "featured": {
+    "eyebrow": "Œuvres choisies",
+    "title": "En vedette",
+    "viewAll": "Voir toutes les œuvres"
+  },
+  "gallery": {
+    "eyebrow": "Collection complète",
+    "title": "Toutes les œuvres",
+    "search": "Rechercher par titre, année, technique, format…",
+    "searchClear": "Effacer la recherche",
+    "sortBy": "Trier par",
+    "sortOptions": {
+      "titleAsc": "Titre A–Z",
+      "titleDesc": "Titre Z–A",
+      "yearAsc": "Année — Plus ancienne",
+      "yearDesc": "Année — Plus récente"
+    },
+    "noResults": "Aucune œuvre trouvée.",
+    "columns": {
+      "title": "Titre",
+      "year": "Année",
+      "medium": "Technique"
+    }
+  },
+  "artwork": {
+    "year": "Année",
+    "medium": "Technique",
+    "size": "Format",
+    "back": "Retour aux œuvres",
+    "prev": "Précédente",
+    "next": "Suivante",
+    "originalTitle": "Titre original",
+    "viewWork": "Voir l'œuvre"
+  },
+  "about": {
+    "eyebrow": "L'artiste",
+    "title": "About",
+    "body1": "FYE (n\u00e9 Obaloluwa Olatide Ladiran) est un cr\u00e9ateur dont l\u2019\u0153uvre explore l\u2019\u00e9motion, la pens\u00e9e et l\u2019identit\u00e9 \u00e0 travers les m\u00e9dias mixtes. Il se d\u00e9crit lui-m\u00eame comme un m\u00e9dium.",
+    "body2": "Au c\u0153ur de sa pratique se trouve Okan, un personnage r\u00e9current dont le nom est emprunt\u00e9 au mot yoruba d\u00e9signant le \u00ab\u00a0c\u0153ur\u00a0\u00bb et l\u2019\u00ab\u00a0\u00e2me\u00a0\u00bb \u2014 sa t\u00eate \u00e9pouse de pr\u00e8s l\u2019anatomie du c\u0153ur humain. Cette convergence entre la forme et le sens est devenue un \u00e9l\u00e9ment fondateur de son \u0153uvre, faisant d\u2019Okan l\u2019incarnation du c\u0153ur, de l\u2019esprit et de l\u2019\u00e2me.",
+    "body3": "Par cette figure, il invite les spectateurs \u00e0 d\u00e9passer la surface et \u00e0 s\u2019engager dans des exp\u00e9riences psychologiques profondes et universelles."
+  },
+  "footer": {
+    "tagline": "Peintures originales et œuvres sur papier.",
+    "inquiries": "Demandes",
+    "rights": "Tous droits réservés."
+  },
+  "theme": {
+    "dark": "Mode sombre",
+    "light": "Mode clair",
+    "toggle": "Changer de thème"
+  },
+  "lang": {
+    "toggle": "Changer de langue"
+  }
+}

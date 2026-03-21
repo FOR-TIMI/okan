@@ -1,33 +1,78 @@
-import { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { artworks } from '../data/artworks';
+import { artworks, getLocaleTitle } from '../data/artworks';
+import type { Locale } from '../data/artworks';
+import ArtCard from '../components/ArtCard';
 import './Gallery.css';
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
+type SortKey = 'titleAsc' | 'titleDesc' | 'yearAsc' | 'yearDesc';
+
+// Pre-build a normalized index for locale-independent fields once at module load.
+// This avoids repeated toLowerCase() calls on every keystroke.
+const SEARCH_INDEX = artworks.map((a) => ({
+  id: a.id,
+  static: [a.titleOriginal, String(a.year), a.medium, a.size].join('\n').toLowerCase(),
+}));
+
+function useDebounce(value: string, delay = 250): string {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const id = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
+  return debounced;
+}
+
 export default function Gallery() {
   const { t, i18n } = useTranslation();
-  const lang = i18n.language as 'ca_en' | 'ca_fr';
+  const locale = i18n.language as Locale;
+  const [sortKey, setSortKey] = useState<SortKey>('yearDesc');
   const [query, setQuery] = useState('');
 
-  const filtered = useMemo(() => {
-    if (!query.trim()) return artworks;
-    const q = query.toLowerCase();
-    return artworks.filter(
-      (a) =>
-        a.title[lang].toLowerCase().includes(q) ||
-        a.artist.toLowerCase().includes(q) ||
-        a.medium[lang].toLowerCase().includes(q) ||
-        String(a.year).includes(q)
-    );
-  }, [query, lang]);
+  // Debounce: input stays snappy; filter/sort only fires after user pauses typing
+  const debouncedQuery = useDebounce(query);
+
+  const results = useMemo(() => {
+    const q = debouncedQuery.trim().toLowerCase();
+
+    // 1. Filter using pre-built index for static fields + runtime locale title
+    const filtered = q
+      ? artworks.filter((a, i) =>
+          SEARCH_INDEX[i].static.includes(q) ||
+          getLocaleTitle(a, locale).toLowerCase().includes(q)
+        )
+      : [...artworks];
+
+    // 2. Sort filtered results
+    switch (sortKey) {
+      case 'titleAsc':
+        return filtered.sort((a, b) =>
+          getLocaleTitle(a, locale).localeCompare(getLocaleTitle(b, locale))
+        );
+      case 'titleDesc':
+        return filtered.sort((a, b) =>
+          getLocaleTitle(b, locale).localeCompare(getLocaleTitle(a, locale))
+        );
+      case 'yearAsc':
+        return filtered.sort((a, b) => a.year - b.year);
+      case 'yearDesc':
+        return filtered.sort((a, b) => b.year - a.year);
+      default:
+        return filtered;
+    }
+  }, [debouncedQuery, sortKey, locale]);
+
+  const handleSortChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortKey(e.target.value as SortKey);
+  }, []);
 
   return (
     <div className="gallery-page">
       <div className="container">
-        {/* Header */}
+        {/* ─── Header ─────────────────────────────── */}
         <div className="gallery-page__header">
           <motion.span
             className="eyebrow"
@@ -46,85 +91,84 @@ export default function Gallery() {
           </motion.h1>
         </div>
 
-        {/* Search */}
+        {/* ─── Toolbar: Search + Sort on one line ──── */}
         <motion.div
-          className="gallery-page__search-wrap"
-          initial={{ opacity: 0, y: 20 }}
+          className="gallery-page__toolbar"
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
+          transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
         >
-          <input
-            className="gallery-page__search"
-            type="search"
-            placeholder={t('gallery.search')}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            aria-label={t('gallery.search')}
-          />
-          <svg className="gallery-page__search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-        </motion.div>
+          <div className="gallery-page__search-wrap">
+            <svg className="gallery-page__search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              className="gallery-page__search"
+              type="search"
+              placeholder={t('gallery.search')}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              aria-label={t('gallery.search')}
+              autoComplete="off"
+              spellCheck={false}
+            />
+            {query && (
+              <button
+                className="gallery-page__search-clear"
+                onClick={() => setQuery('')}
+                aria-label={t('gallery.searchClear')}
+              >
+                ×
+              </button>
+            )}
+          </div>
 
-        {/* Column headers */}
-        <motion.div
-          className="gallery-page__cols"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.35, duration: 0.5 }}
-        >
-          <span>{t('gallery.columns.title')}</span>
-          <span>{t('gallery.columns.year')}</span>
-          <span className="gallery-page__col-medium">{t('gallery.columns.medium')}</span>
+          <div className="gallery-page__controls">
+            <label className="gallery-page__sort-label" htmlFor="gallery-sort">
+              {t('gallery.sortBy')}
+            </label>
+            <div className="gallery-page__select-wrap">
+              <select
+                id="gallery-sort"
+                className="gallery-page__select"
+                value={sortKey}
+                onChange={handleSortChange}
+                aria-label={t('gallery.sortBy')}
+              >
+                <option value="yearDesc">{t('gallery.sortOptions.yearDesc')}</option>
+                <option value="yearAsc">{t('gallery.sortOptions.yearAsc')}</option>
+                <option value="titleAsc">{t('gallery.sortOptions.titleAsc')}</option>
+                <option value="titleDesc">{t('gallery.sortOptions.titleDesc')}</option>
+              </select>
+              <svg className="gallery-page__select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+          </div>
         </motion.div>
 
         <div className="divider" />
 
-        {/* Rows */}
-        {filtered.length === 0 ? (
-          <motion.p
-            className="gallery-page__empty"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
+        {/* ─── Grid ───────────────────────────────── */}
+        {results.length === 0 ? (
+          <motion.p className="gallery-page__empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             {t('gallery.noResults')}
           </motion.p>
         ) : (
-          <ul className="gallery-page__list">
-            {filtered.map((artwork, i) => (
-              <motion.li
-                key={artwork.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.06, ease: EASE }}
-              >
-                <Link to={`/art/${artwork.slug}`} className="gallery-page__row">
-                  <div className="gallery-page__row-left">
-                    <div className="gallery-page__thumb-wrap">
-                      <img
-                        className="gallery-page__thumb"
-                        src={artwork.image}
-                        alt={artwork.title[lang]}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                    <div className="gallery-page__row-info">
-                      <span className="gallery-page__row-title">{artwork.title[lang]}</span>
-                      <span className="gallery-page__row-artist">{artwork.artist}</span>
-                    </div>
-                  </div>
-                  <span className="gallery-page__row-year">{artwork.year}</span>
-                  <span className="gallery-page__row-medium gallery-page__col-medium">
-                    {artwork.medium[lang]}
-                  </span>
-                  <span className="gallery-page__row-arrow">→</span>
-                </Link>
-                <div className="divider" />
-              </motion.li>
+          <motion.ul
+            className="gallery-page__grid"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
+            role="list"
+          >
+            {results.map((artwork, i) => (
+              <li key={artwork.id} role="listitem">
+                <ArtCard artwork={artwork} index={i} priority={i < 3} />
+              </li>
             ))}
-          </ul>
+          </motion.ul>
         )}
       </div>
     </div>

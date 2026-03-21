@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import OkanLogo from '../components/OkanLogo';
 import './About.css';
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
@@ -10,50 +11,32 @@ export default function About() {
   return (
     <div className="about-page">
       <div className="container">
-        <div className="about-page__layout">
-          {/* Text */}
-          <div className="about-page__text">
-            <motion.span
-              className="eyebrow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: EASE }}
-            >
-              {t('about.eyebrow')}
-            </motion.span>
+        <div className="about-page__inner">
 
-            <motion.h1
-              className="about-page__title"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-            >
-              {t('about.title')}
-            </motion.h1>
 
-            {[t('about.body1'), t('about.body2'), t('about.body3')].map((para, i) => (
-              <motion.p
-                key={i}
-                className="about-page__para"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 + i * 0.12, ease: EASE }}
-              >
-                {para}
-              </motion.p>
-            ))}
-          </div>
-
-          {/* Visual accent */}
           <motion.div
-            className="about-page__visual"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3, ease: EASE }}
+            className="about-page__text"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
           >
-            <div className="about-page__sigil">
-              <span>O</span>
+            <span className="eyebrow">{t('about.eyebrow')}</span>
+            <h1 className="about-page__name">{t('about.title')}</h1>
+
+            <div className="about-page__body">
+              <p>{t('about.body1')}</p>
+              <p>{t('about.body2')}</p>
+              <p>{t('about.body3')}</p>
             </div>
+          </motion.div>
+
+          <motion.div
+            className="about-page__logo-wrap"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: EASE }}
+          >
+            <OkanLogo size={500} className="about-page__logo" />
           </motion.div>
         </div>
       </div>
