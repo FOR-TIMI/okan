@@ -2,17 +2,27 @@
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Okan — Original paintings and works on paper." />
     <title>Okan — Art Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script type="module" crossorigin src="./assets/index-NES-eLN3.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/proxy-CqPsmYVL.js">
-    <link rel="stylesheet" crossorigin href="./assets/index-B9AOjObE.css">
+    <script type="module" crossorigin src="/assets/index-Drwa7Fau.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/proxy-CqPsmYVL.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-B9AOjObE.css">
   </head>
   <body>
     <div id="root"></div>
+    <!-- Restore deep-link path after GitHub Pages 404 redirect -->
+    <script>
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== '/') {
+          window.history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
   </body>
 </html>
